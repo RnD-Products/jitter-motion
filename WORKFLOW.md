@@ -4,7 +4,7 @@ This is the detailed working guide for Jitter (jitter.video) motion work in this
 
 ## 1. Setup
 
-- **Jitter MCP connector.** All edits go through the Jitter MCP tools (prefix `mcp__<id>__`):
+- **Jitter MCP connector** (full guide: [JITTER-MCP.md](JITTER-MCP.md)). All edits go through the Jitter MCP tools (prefix `mcp__<id>__`):
   - `list_files`: find files.
   - `searchConf`, `searchConfBatch`: read-only JavaScript against the file.
   - `applyConf`: edits.
