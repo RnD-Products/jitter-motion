@@ -10,6 +10,7 @@ Each folder here is one skill: a reusable recipe any agent can follow. Claude Co
 | [jitter-shared-element-showreel](jitter-shared-element-showreel/SKILL.md) | A multi-frame story where one element travels through every frame (e.g. Figma → Webflow → Live) |
 | [jitter-3d-carousel-showreel](jitter-3d-carousel-showreel/SKILL.md) | Two frames of phones/cards with different screens: band reveal, old devices tilt and blur out, new ones sweep in with a 3D turn, row glides into place (SH08, Scene-143 style) |
 | [jitter-gradient-reveal-dashboard](jitter-gradient-reveal-dashboard/SKILL.md) | A UI/dashboard product shot: UI rises in, vertical gradient mask sweep reveals a photo and a second UI copy together, then counters and graph motion (SH09, Scene-123 style) |
+| [jitter-screen-row-dive](jitter-screen-row-dive/SKILL.md) | A row of app screens: one starts alone, others pop in, each screen builds its UI, then the camera dives into the middle screen, which grows bigger (SH10, Scene-132 style) |
 
 ## Adding a new skill
 

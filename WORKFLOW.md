@@ -224,6 +224,42 @@ Lessons from the user's feedback:
 - The UI change and the photo reveal **start at the same time**.
 - Counters and graph motion need **editable layers**. If the cards or chart are single SVGs, ask the user to supply real text and graph layers; they replaced the SVGs in "Content".
 
+## 5d. Screen row zoom-dive with inside motion (SH10)
+
+**Universal skill:** [skills/jitter-screen-row-dive/SKILL.md](skills/jitter-screen-row-dive/SKILL.md).
+
+Use this for a fast app showcase (Scene-132 style). A row of app screens on a flat colour background works like this:
+1. One screen starts alone.
+2. The other screens **pop** in from the centre outward.
+3. Every screen builds its own UI (**inside motion**).
+4. The camera zooms in, then **dives** into the middle screen, which grows bigger than the others while its neighbours spread off the edges.
+
+Inside motion needs **editable screens** (layer groups, not flat images). Ask for them if the frame has images.
+
+Layer structure:
+```
+Main (fill = frame bg colour, clipped)
+└─ Screens Row (centred on the artboard → it zooms around the middle screen)
+   ├─ Screen 1..n (named left to right, e.g. "Screen 3 - Edit via Voice (centre)")
+   └─ middle screen moved to the TOP of the stack (it grows over its neighbours)
+```
+
+Timeline (2.83s; the user tuned the spread values):
+| Time (ms) | Beat | Operations |
+|---|---|---|
+| 0 | Only the middle screen | `hide` all other screens at 0 |
+| 100 / 250 | **Pops** from the centre outward | `show` the inner neighbours at 100, the outer ones at 250 (instant, no fade) |
+| 0–1600 | Steady zoom | `scale` the row 0.35 → 0.75, smooth |
+| 250–1410 | **Inside motion** (slowdown) | Lists: `slideIn` up 40 per row, staggered 40–45ms. Photo tiles: `growIn` 0.8, staggered 50ms. Waveform: `resize` each bar height 4 → its height, anchor centre, staggered 15ms left to right. Text: `slideIn`/`textIn` by lines. Button: `growIn` 0.6. Illustration: background `fadeIn`, clouds `slideIn` left, ladders and character `slideIn` up staggered, then title, text and buttons `slideIn` up |
+| 1600–2830 | **Dive** (out) | Row `scale` 0.75 → 2.2, accelerate |
+| 1600–2830 | **Middle screen grows bigger than the others** | `scale` 1 → 1.3 on the middle screen, accelerate |
+| 1600–2830 | Neighbours spread | `move` outward: inner ±300, outer ±440 (user values), accelerate |
+
+Lessons from the user's feedback:
+- "Middle screen will scale big" means: **once the build-in has finished, during the out/dive**, the middle screen grows more than the rest.
+- The neighbours must move out far enough that the growing middle screen never overlaps them.
+- Screens pop with hard `show` cuts; no fades.
+
 ## 6. Multi-scene showreel recipe (SH05 - v2)
 
 This is the structure that worked for a 3-frame website showreel. For tool → tool → live stories, prefer section 5.
