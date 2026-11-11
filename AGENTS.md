@@ -25,6 +25,8 @@ See [WORKFLOW.md](WORKFLOW.md) for the full process, Jitter API notes, the Card 
 
 - `skills/jitter-shared-element-showreel/SKILL.md`: the user's universal workflow for multi-frame stories (for example Figma → Webflow → Live). One continuous scene, one hero element that travels through every frame, overlapping UI crossfades, slowdown for entries and smooth for everything else.
 
+- `skills/jitter-3d-carousel-showreel/SKILL.md`: two frames of devices with different screens. Band reveal, old devices tilt and blur out, new ones sweep in with a 3D turn and blur, the row glides into the final layout, the title leaves and returns with letter spacing, and the background ellipses keep moving. Never use flat edge-on flips.
+
 ### Using the skills from any agent
 
 **Claude Code is the primary agent for this folder.** It does the main Jitter work and keeps the rules, workflow and skills up to date. Other agents are supported as secondary agents and follow the same files.

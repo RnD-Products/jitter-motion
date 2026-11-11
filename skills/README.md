@@ -8,6 +8,7 @@ Each folder here is one skill: a reusable recipe any agent can follow. Claude Co
 |---|---|
 | [jitter-motion-styles](jitter-motion-styles/SKILL.md) | The user names a motion style: Bold, Playful, Elegant, Cinematic or Soft |
 | [jitter-shared-element-showreel](jitter-shared-element-showreel/SKILL.md) | A multi-frame story where one element travels through every frame (e.g. Figma → Webflow → Live) |
+| [jitter-3d-carousel-showreel](jitter-3d-carousel-showreel/SKILL.md) | Two frames of phones/cards with different screens: band reveal, old devices tilt and blur out, new ones sweep in with a 3D turn, row glides into place (SH08, Scene-143 style) |
 
 ## Adding a new skill
 

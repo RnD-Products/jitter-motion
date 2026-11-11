@@ -161,6 +161,27 @@ This is the detailed working guide for Jitter (jitter.video) motion work in this
 - **A second `scale` op without `fromValue`** continues from the current value, so a layer can grow, then shrink, in one timeline.
 - Stay at the duration the user sets: 3.5s here, with about a 0.8s hold on the last frame.
 
+## 5b. 3D carousel between device frames (SH08)
+
+**Universal skill:** [skills/jitter-3d-carousel-showreel/SKILL.md](skills/jitter-3d-carousel-showreel/SKILL.md).
+
+Use this when frame A and frame B both show phones or cards, but **with different screens**, so nothing is shared. It follows Scene-143.
+
+The beats, in order:
+1. A band reveal opens Main from the centre.
+2. Frame A's devices rise in.
+3. They then **tilt 40° in 3D and blur as they slide out** to the left.
+4. Frame B's devices **sweep in from the right, turning -40° → 0° while the blur clears**, staggered 80ms, with the same slide distance for all.
+5. The whole row **glides** into frame B's exact positions.
+6. The title leaves and returns with letter spacing opening and closing.
+7. Every background ellipse drifts, rotates and scales from 0ms.
+
+Lessons from the user's feedback:
+- **Flat edge-on Card Flips look "cheap".** Use Card Flip only as a tilt while moving.
+- Slide distances must take the device fully off-screen. Work them out from the real positions.
+- Background loops start at 0, with no stagger delay.
+- The user finished it with an outro: `slideOut` up 80, `noFade`, accelerate, on the title and the row. The artboard is 3240ms.
+
 ## 6. Multi-scene showreel recipe (SH05 - v2)
 
 This is the structure that worked for a 3-frame website showreel. For tool → tool → live stories, prefer section 5.
