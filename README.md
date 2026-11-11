@@ -1,6 +1,6 @@
 # Jitter motion workflow
 
-Rules, skills, workflow notes and helper tools for Jitter (jitter.video) animation work with any AI agent: Claude Code, Codex, Cursor, Copilot, Gemini or Windsurf. Every agent is pointed to [AGENTS.md](AGENTS.md), the single source of rules and the entry point to the skills.
+Rules, skills, workflow notes and helper tools for Jitter (jitter.video) animation work led by **Claude Code** (the primary agent), and also usable by any other AI agent such as Codex, Cursor, Copilot, Gemini or Windsurf. Every agent is pointed to [AGENTS.md](AGENTS.md), the single source of rules and the entry point to the skills.
 
 - [AGENTS.md](AGENTS.md): the rules (read first).
 - [WORKFLOW.md](WORKFLOW.md): the detailed how-to-work guide, Jitter API notes and recipes.

@@ -27,7 +27,9 @@ See [WORKFLOW.md](WORKFLOW.md) for the full process, Jitter API notes, the Card 
 
 ### Using the skills from any agent
 
-- **Claude Code** loads the skills automatically through `.claude/skills/` (a link to `skills/`).
+**Claude Code is the primary agent for this folder.** It does the main Jitter work and keeps the rules, workflow and skills up to date. Other agents are supported as secondary agents and follow the same files.
+
+- **Claude Code (primary)** loads the skills automatically through `.claude/skills/` (a link to `skills/`). When the user teaches a new method, Claude Code writes it into the skills and docs.
 - **Every other agent** (Codex, Cursor, Copilot, Gemini, Windsurf and others) does not load skills automatically. **Before each task, open [skills/README.md](skills/README.md), find the skill whose "Use it when" matches the request, read its `SKILL.md`, and follow it step by step.**
 - Each agent has a pointer file that sends it here: `CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md`, `.cursor/rules/jitter.mdc` and `.windsurfrules`. Codex reads this AGENTS.md directly.
 - All agents need the Jitter MCP connector to edit Jitter files. See [JITTER-MCP.md](JITTER-MCP.md).
