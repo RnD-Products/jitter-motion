@@ -26,3 +26,5 @@ See [WORKFLOW.md](WORKFLOW.md) for the full process, Jitter API notes, the Card 
 - `skills/jitter-shared-element-showreel/SKILL.md`: the user's universal workflow for multi-frame stories (for example Figma → Webflow → Live). One continuous scene, one hero element that travels through every frame, overlapping UI crossfades, slowdown for entries and smooth for everything else.
 
 Claude Code finds the skills through `.claude/skills/` (a link to `skills/`). Other agents should read `skills/<name>/SKILL.md` directly.
+
+More skills will be added over time. The full list and the steps for adding one are in [skills/README.md](skills/README.md). When the user teaches a new reusable method and asks to save it as a skill, follow those steps.
