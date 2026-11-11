@@ -36,6 +36,12 @@ Frame_03, Frame_04 … (card groups)
 - **Donut or pie:** `spinIn` 90°. Legends `slideIn` up, staggered about 30ms.
 - **Dot-matrix columns:** `maskRevealIn` up per column, about 3–4ms stagger (a wave).
 - **Titles and buttons:** short `slideIn` up 20 or `fadeIn`.
+- **Gauge ring:** `maskRevealIn` right on the ring (slowdown), then the centre label `growIn` 0.6.
+- **Category or progress bars:** `maskRevealIn` right per track, staggered about 55ms.
+- **KPI numbers:** `counter`. The text keeps its `$`, `%`, `k`/`M`, commas and decimals. Choose `from` so that `(to − from) / step` is a whole number of at most about 100.
+- **Badges** (+x%): `growIn` 0.5 after the number lands.
+- **Big single card:** `growIn` from **1.5×** (from big). A row of cards: `growIn` 0.7, staggered about 73ms. Last frame: `growOut` 0.85.
+- Make sure numbers are real text with loaded fonts (`conf.measureText` works) before planning counters.
 
 ## 5. Rules
 - Mask and box always the same size and timing. Breakout only at the end.

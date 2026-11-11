@@ -308,6 +308,43 @@ Lessons from the user's feedback:
 - Card detail motion needs **editable** chart groups. The user replaced flat SVGs (the graph, the donut) with layers.
 - A resize on a rect after earlier resizes can behave oddly (it only stretched upward). Use `scale` for the final full-screen growth.
 
+## 5f. Dashboard cards: grow out / grow in with live data (SH11 cards)
+
+**Skill:** card part of [skills/jitter-box-portal-showreel/SKILL.md](skills/jitter-box-portal-showreel/SKILL.md) (sections 3.7 and 4).
+
+Use this for frame 1 = one big data card and frame 2 = a row of data cards (KPIs, gauge, dot charts, category bars), with a simple **grow-out / grow-in** transition (the user's "Idea C"). Nothing travels between the frames.
+
+Layer structure:
+```
+Main (fill = frame bg, clipped)
+├─ Frame_01 - Budget Card    parts named: Card BG, Header - Title, Header - Total, y-labels, grid Lines, Bars, Legend, Tooltip
+└─ Frame_02 - Cards Row      Card 1..4 named left to right
+```
+Before building, make sure numbers are **text** (not textImg/SVG). The user re-made them as text in their own uploaded fonts (Circular Std, General Sans). Check that `conf.measureText` works, which confirms the fonts load.
+
+Timeline (2.5s, user-tuned):
+| Time (ms) | Beat | Operations |
+|---|---|---|
+| 0–350 | Card 1 in | `growIn` **scale 1.5** (comes in from big and settles), slowdown |
+| 120–415 | Headers | `slideIn` up 20, staggered about 50ms |
+| 145–513 | Grid + y-labels | Lines `maskRevealIn` right (linear), labels `fadeIn` bottom to top, staggered about 20ms |
+| 186–759 | Total counts | `counter` 0 → 34,040 (step = total / 100) |
+| 267–800 | Bars | Each bar pair `maskRevealIn` up, staggered about 41ms. Month labels `slideIn` up 10. Then the legend `fadeIn` and the tooltip `growIn` 0.5 |
+| 880–1080 | Card 1 out | `growOut` 1.3, accelerate |
+| 1080–1621 | Cards in | Each card `growIn` 0.7, staggered about 73ms. Headers `slideIn` up 20. Legends `fadeIn` |
+| 1218–2080 | Live data | Counters (0.4→94.4%, 8.1→$578.1k, 0→18, 0→$4.2M). Gauge ring `maskRevealIn` right. Gauge label and badges `growIn` 0.5–0.6. Dot columns `maskRevealIn` up, staggered 32–46ms. Category track bars `maskRevealIn` right, staggered 55ms |
+| 2200–2500 | Row out | `growOut` 0.85 on the whole row, accelerate |
+
+Counter notes:
+- Formatting comes from the text: `$`, `k`/`M`, `%`, commas and decimals are kept.
+- Choose `from` so that `(to − from) / step` is a whole number of at most about 100. For example 94.4% uses from 0.4, step 1; $578.1k uses from 8.1, step 6; $4.2M uses from 0, step 0.1.
+- Use `effect.in` appear and `effect.out` disappear, with nodeDuration 1 and simultaneous.
+
+Lessons from the user's edits:
+- They tightened everything (about 0.82× my timing) and shortened the artboard to 2.5s. These shots should feel quick.
+- The first card grows in **from big (1.5×)**, not from small.
+- The last frame needs an outro (`growOut` 0.85) at the end.
+
 ## 6. Multi-scene showreel recipe (SH05 - v2)
 
 This is the structure that worked for a 3-frame website showreel. For tool → tool → live stories, prefer section 5.
