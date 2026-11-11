@@ -28,6 +28,8 @@ See [WORKFLOW.md](WORKFLOW.md) for the full process, Jitter API notes, the Card 
 
 - `skills/jitter-3d-carousel-showreel/SKILL.md`: two frames of devices with different screens. Band reveal, old devices tilt and blur out, new ones sweep in with a 3D turn and blur, the row glides into the final layout, the title leaves and returns with letter spacing, and the background ellipses keep moving. Never use flat edge-on flips.
 
+- `skills/jitter-gradient-reveal-dashboard/SKILL.md`: dashboard or app product shot. The UI rises in, then a vertical gradient mask sweep reveals the photo background and a second UI copy at the same moment, followed by counters and graph motion. No white flash.
+
 ### Using the skills from any agent
 
 **Claude Code is the primary agent for this folder.** It does the main Jitter work and keeps the rules, workflow and skills up to date. Other agents are supported as secondary agents and follow the same files.

@@ -182,6 +182,48 @@ Lessons from the user's feedback:
 - Background loops start at 0, with no stagger delay.
 - The user finished it with an outro: `slideOut` up 80, `noFade`, accelerate, on the title and the row. The artboard is 3240ms.
 
+## 5c. Dashboard product shot with a vertical gradient mask reveal (SH09)
+
+**Universal skill:** [skills/jitter-gradient-reveal-dashboard/SKILL.md](skills/jitter-gradient-reveal-dashboard/SKILL.md).
+
+Use this when frame A is a UI (dashboard, app screen) on a plain background and frame B is **the same UI over a photo background**, and you want a Scene-123-style product shot. The user's rules for this shot:
+- **No white flash.** New scenes are revealed by a **vertical gradient mask sweep** (the idea of Jitter's "Gradients Vertical Sweep" template).
+- **Two copies of the UI.** Copy A rises in. Copy B is revealed by the same gradient sweep **at the same moment as the photo**, grows in, and then the data animates.
+
+Layer structure:
+```
+Main (fill = frame A background, clipped)
+├─ Photo Reveal (maskGrp)
+│  ├─ Mask - Vertical Gradient   rect 1940×2440 at y 1220; fill: linear gradient, angle π/2, stops #ffffff00 @0 → #ffffff @0.3 → #ffffff @1
+│  └─ Background Photo
+├─ Dashboard A - Frame 01        rising-in copy (frame A position)
+└─ Dashboard B Reveal (maskGrp)
+   ├─ Mask - Vertical Gradient (Dashboard B)   same rect
+   └─ Dashboard B - Frame 02     copy at frame B position, with editable text and graph layers
+```
+- **The mask is a `maskGrp`.** Its first child is the mask. The mask uses the fill's **alpha**, so the transparent top of the gradient gives a soft edge.
+- **Sweep travel:** `-(1220 + maskHeight × 0.3) - 20` (about -1972), so the solid part just covers the frame. A longer travel makes the visible sweep too fast.
+
+Timeline (2.83s, user-tuned values):
+| Time (ms) | Beat | Operations |
+|---|---|---|
+| 0–820 | A rises in | `scale` 0.6 → 0.82 (smooth), `move` y +668 → -80 (smooth) |
+| 600–1400 | A scrolls up | `move` y -166, **natural** easing |
+| **920** | **Everything switches together** | |
+| 920–1620 | Photo sweep | Mask `move` (smooth). Photo `scale` 1.5 → 1 (920–1810), `blurRadius` 10 → 0 (920–1270), drift x -40 |
+| 920–1620 | B sweep | Its mask `move` (user's custom easing), `growIn` scale **2.6** on B (it settles down from big), slowdown |
+| 920–1620 | A leaves | `scale` to 1.4 (pushes toward the camera), `fadeOut` 920–1200 (stops double text under B's soft edge), `hide` at 1620 |
+| 970–2108 | Counters on B | `counter` on the number texts (e.g. $2,047,320 → $2,847,320 step 8000; $25,400 → $125,400 step 1000), **linear**, starts staggered 970 and 1054. `effect` = appear/disappear, nodeDuration 1, simultaneous |
+| 1000–1500 | Bars | `maskRevealIn` **right** on the bar group (linear) |
+| 1150–1950 | Line draws | `maskRevealIn` right on the line SVG (linear) |
+| 1130–1950 | Dots pop | `growIn` 0.3 on each dot, 220ms, start = 1150 + (x / graphWidth) × 800 - 20 (slowdown) |
+| 1580–1880 | Tooltip | `growIn` 0.6 (slowdown) |
+
+Lessons from the user's feedback:
+- A white flash cut is not wanted. Use the gradient mask sweep.
+- The UI change and the photo reveal **start at the same time**.
+- Counters and graph motion need **editable layers**. If the cards or chart are single SVGs, ask the user to supply real text and graph layers; they replaced the SVGs in "Content".
+
 ## 6. Multi-scene showreel recipe (SH05 - v2)
 
 This is the structure that worked for a 3-frame website showreel. For tool → tool → live stories, prefer section 5.
