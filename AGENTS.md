@@ -23,4 +23,6 @@ See [WORKFLOW.md](WORKFLOW.md) for the full process, Jitter API notes, the Card 
 
 - `skills/jitter-motion-styles/SKILL.md`: the words **Bold, Playful, Elegant, Cinematic, Soft** are the user's five motion styles. When the user says one, apply that style to a cloned artboard. The skill holds the in and out recipes.
 
-Claude Code finds the skill through `.claude/skills/` (a link to `skills/`). Other agents should read `skills/<name>/SKILL.md` directly.
+- `skills/jitter-shared-element-showreel/SKILL.md`: the user's universal workflow for multi-frame stories (for example Figma → Webflow → Live). One continuous scene, one hero element that travels through every frame, overlapping UI crossfades, slowdown for entries and smooth for everything else.
+
+Claude Code finds the skills through `.claude/skills/` (a link to `skills/`). Other agents should read `skills/<name>/SKILL.md` directly.

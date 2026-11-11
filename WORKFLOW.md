@@ -123,7 +123,7 @@ This is the detailed working guide for Jitter (jitter.video) motion work in this
 
 ## 5. Preferred: one continuous scene with a travelling element (SH07, the user's own build)
 
-**Use this approach by default** for "design tool → build tool → live site" stories (Figma → Webflow → Live). The user rebuilt SH07 this way themselves. It is simpler and smoother than separate scene groups with swaps (section 6).
+**Universal skill:** [skills/jitter-shared-element-showreel/SKILL.md](skills/jitter-shared-element-showreel/SKILL.md). **Use this approach by default** for "design tool → build tool → live site" stories (Figma → Webflow → Live). The user rebuilt SH07 this way themselves. It is simpler and smoother than separate scene groups with swaps (section 6).
 
 ### Story
 1. UI design happens in Figma (Frame_01).
