@@ -121,9 +121,49 @@ This is the detailed working guide for Jitter (jitter.video) motion work in this
 - "Rate-limiting" or "servers busy" means wait about 30 to 60 seconds, then retry once.
 - Use a background `sleep 30` and wait for its notification instead of polling.
 
-## 5. Multi-scene showreel recipe (SH05 - v2)
+## 5. Preferred: one continuous scene with a travelling element (SH07, the user's own build)
 
-This is the structure that worked for a 3-frame website showreel.
+**Use this approach by default** for "design tool → build tool → live site" stories (Figma → Webflow → Live). The user rebuilt SH07 this way themselves. It is simpler and smoother than separate scene groups with swaps (section 6).
+
+### Story
+1. UI design happens in Figma (Frame_01).
+2. It moves to Webflow (Frame_02).
+3. It goes live (Frame_03, responsive device mockups).
+
+### Layer structure
+- **Main** (`layerGrp`, artboard size, clipped) holds everything. The artboard background is the final colour (navy `#0f1722`).
+- **Container** (`layerGrp`, the editor-window box, `clipsContent: true`) sits inside Main and holds, back to front:
+  - **UI Mockups_Fig**: the Figma editor chrome (panels, rails, rulers) with the window background `#1E1E1E`.
+  - **UI Mockups_Webflow**: the Webflow editor chrome (top bar, navigator, breadcrumb, style panel) with the same `#1E1E1E` background.
+  - The Figma canvas designs: **Web**, **Tablet** and **Mobile**, each a label text plus a clipped page group.
+  - The Live device mockups: **Tablet_mkp** and **Mobile_mkp**.
+- **One Web layer is used through the whole story.** Never swap it for another frame's copy; transform the same layer.
+
+### Timeline (3.5s artboard)
+| Time | Beat | What moves | Easing |
+|---|---|---|---|
+| 0–0.86s | Figma entry | `growIn` 0.9 on UI Mockups_Fig. Web, Tablet and Mobile `slideIn` up 80px, staggered 80ms | Slowdown |
+| 1.0–1.3s | Figma leaves | `fadeOut` on UI Mockups_Fig, Tablet and Mobile. The Web label fades 1.0–1.2s | Smooth |
+| 0.98–1.48s | **Web grows into Webflow** | On the Web group: `scale` 1 → about 2.57, `move` into the Webflow canvas position, `cornerRadius` → `[4,4,0,0]` (Webflow canvas look). Group these three in one nested `opGrp` | Smooth |
+| 1.12–1.42s | Webflow arrives | `fadeIn` on UI Mockups_Webflow. It **overlaps** the Figma fade, so the two editors crossfade | Smooth |
+| 1.66–1.96s | Webflow leaves | `fadeOut` on UI Mockups_Webflow. Its grey goes with it, revealing the navy artboard | Smooth |
+| 1.72–2.22s | **Web goes Live** | `resize` the Container to full screen (about 1949×1250) so it stops clipping. On the Web: `scale` from current to about 2.12 (no `fromValue`), plus a `move` into the Live web position (moves add up) | Smooth |
+| 2.1–2.6s | Tablet arrives | `slideIn` up 120px on Tablet_mkp | Slowdown |
+| 2.2–2.7s | Mobile arrives | `slideIn` left 120px on Mobile_mkp | Slowdown |
+| 2.7–3.5s | Hold | Live responsive frame | |
+
+### Principles behind it
+- **Entries use slowdown; everything after (fades, transforms, transitions) uses smooth** (`smooth:standard:v1`, intensity 50). The user prefers smooth over linear for these fades.
+- **Overlap the beats.** The old UI fades out, the shared element transforms, and the new UI fades in, all at the same time.
+- **Shared-element transition.** The same layer travels from one frame's position to the next. Work out its scale from the width ratio, and its move so its top-left lands on the next frame's position.
+- **Grow the clipping container** to full screen instead of turning clipping off or swapping scenes.
+- **The background change comes for free.** Put the final colour on the artboard and let the editor window's `#1E1E1E` fade out with the UI group.
+- **A second `scale` op without `fromValue`** continues from the current value, so a layer can grow, then shrink, in one timeline.
+- Stay at the duration the user sets: 3.5s here, with about a 0.8s hold on the last frame.
+
+## 6. Multi-scene showreel recipe (SH05 - v2)
+
+This is the structure that worked for a 3-frame website showreel. For tool → tool → live stories, prefer section 5.
 
 **Setup**
 - Artboard 1940×1220.
@@ -156,14 +196,14 @@ This is the structure that worked for a 3-frame website showreel.
 - The card scales up to full screen over the labels.
 - 200ms before it lands, a white rect fades in, so everything fades to white.
 
-## 6. Logo build recipe
+## 7. Logo build recipe
 
 - Icon: `shrinkIn` scale 1.6 to 2 (it comes from big). Optionally add `spinIn`.
 - Letters (shapes): `slideIn` up 40px, 250–300ms each, staggered 50ms left to right (or in a shuffled order for a playful build).
 - Tagline: `maskRevealIn` to the right (linear).
 - Outro: the reverse. Tagline `maskRevealOut` up, letters `slideOut` down from right to left, icon `shrinkOut`.
 
-## 7. Reply checklist
+## 8. Reply checklist
 
 - Name the artboard you changed, with times in seconds.
 - State the easing only if it differs from the standard.
