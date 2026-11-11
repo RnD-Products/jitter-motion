@@ -14,7 +14,7 @@ These are the user's rules for Jitter animation work in this folder. Read them b
 5. **Do not guess what the user means.** If a rule or a word is covered by a skill (see below), follow it.
 6. **Environment notes:** copy and paste of animation segments does not work in the Claude app's embedded Browser pane (clipboard is denied). Use a normal browser, or copy animations through the Jitter API tools.
 7. Keep replies short and honest. Report what was changed and what was not verified.
-8. **"Save this as workflow" means WORKFLOW.md only.** Add or update a section in WORKFLOW.md in the same style as the existing sections. Do not create a new skill unless the user explicitly asks for a skill.
+8. **"Save this as workflow" means WORKFLOW.md first.** Add or update a section in WORKFLOW.md in the same style as the existing sections. Then, only if it is needed (the method is reusable on other projects, or it changes a recipe an existing skill holds), also add it to a skill: update the matching skill in `skills/`, or create a new one if none fits. Say which skill was changed and why.
 
 ## Detailed workflow
 
