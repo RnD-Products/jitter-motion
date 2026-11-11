@@ -1,0 +1,1 @@
+Read and follow [AGENTS.md](../AGENTS.md) at the root of this repository before any Jitter work. It holds the rules, links to the detailed workflow (WORKFLOW.md), the Jitter MCP guide (JITTER-MCP.md) and the skills index (skills/README.md). Before each task, check skills/README.md and follow the matching skill.

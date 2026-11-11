@@ -25,6 +25,11 @@ See [WORKFLOW.md](WORKFLOW.md) for the full process, Jitter API notes, the Card 
 
 - `skills/jitter-shared-element-showreel/SKILL.md`: the user's universal workflow for multi-frame stories (for example Figma → Webflow → Live). One continuous scene, one hero element that travels through every frame, overlapping UI crossfades, slowdown for entries and smooth for everything else.
 
-Claude Code finds the skills through `.claude/skills/` (a link to `skills/`). Other agents should read `skills/<name>/SKILL.md` directly.
+### Using the skills from any agent
+
+- **Claude Code** loads the skills automatically through `.claude/skills/` (a link to `skills/`).
+- **Every other agent** (Codex, Cursor, Copilot, Gemini, Windsurf and others) does not load skills automatically. **Before each task, open [skills/README.md](skills/README.md), find the skill whose "Use it when" matches the request, read its `SKILL.md`, and follow it step by step.**
+- Each agent has a pointer file that sends it here: `CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md`, `.cursor/rules/jitter.mdc` and `.windsurfrules`. Codex reads this AGENTS.md directly.
+- All agents need the Jitter MCP connector to edit Jitter files. See [JITTER-MCP.md](JITTER-MCP.md).
 
 More skills will be added over time. The full list and the steps for adding one are in [skills/README.md](skills/README.md). When the user teaches a new reusable method and asks to save it as a skill, follow those steps.
