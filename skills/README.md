@@ -11,7 +11,7 @@ Each folder here is one skill: a reusable recipe any agent can follow. Claude Co
 
 ## Adding a new skill
 
-1. Copy the template: `cp -R skills/_template skills/jitter-<short-name>`.
+1. Copy the template: `mkdir skills/jitter-<short-name> && cp skills/_template/SKILL.template.md skills/jitter-<short-name>/SKILL.md`.
 2. Fill in `SKILL.md`:
    - `name` must match the folder name.
    - `description` says what it does **and** when to use it, with the user's trigger words. Agents decide from this line alone whether to load the skill.
@@ -20,4 +20,4 @@ Each folder here is one skill: a reusable recipe any agent can follow. Claude Co
 4. Add one line under "Skills" in [../AGENTS.md](../AGENTS.md).
 5. Commit and push.
 
-Folders starting with `_` (like `_template`) are not skills and are ignored.
+`_template` is not a skill: its file is named `SKILL.template.md` so agents never load it.
