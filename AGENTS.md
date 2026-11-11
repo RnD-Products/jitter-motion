@@ -32,6 +32,8 @@ See [WORKFLOW.md](WORKFLOW.md) for the full process, Jitter API notes, the Card 
 
 - `skills/jitter-screen-row-dive/SKILL.md`: fast app showcase. A row of screens pops in from the centre, each screen has inside motion, then the camera dives into the middle screen, which scales bigger than the others while the neighbours spread out.
 
+- `skills/jitter-box-portal-showreel/SKILL.md`: phone on title → small coloured box portal → second phone in the box (breaks out of its top) → box fills the screen → card frames grow in and out with chart detail motion. The mask and box always move together.
+
 ### Using the skills from any agent
 
 **Claude Code is the primary agent for this folder.** It does the main Jitter work and keeps the rules, workflow and skills up to date. Other agents are supported as secondary agents and follow the same files.

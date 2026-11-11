@@ -260,6 +260,54 @@ Lessons from the user's feedback:
 - The neighbours must move out far enough that the growing middle screen never overlaps them.
 - Screens pop with hard `show` cuts; no fades.
 
+## 5e. Box-portal phone transition + grow-out/in card frames (SH11)
+
+**Universal skill:** [skills/jitter-box-portal-showreel/SKILL.md](skills/jitter-box-portal-showreel/SKILL.md).
+
+Use this when you have a phone render on a title (frame 1), then a phone in a coloured box with a tagline (frame 2), then dashboard card frames (frames 3 and 4). It follows Scene-152: **a small coloured box is the portal** the next phone appears in, and the box then fills the screen to hand over to the card frames.
+
+Layer structure (the user's final version):
+```
+Main (fill #efefef, clipped)
+├─ Title (frame 1 text)
+├─ Phone 1 (render)
+├─ Box Portal (layerGrp, hidden until the switch)
+│  └─ Phone 2 Mask (maskGrp)
+│     ├─ Mask - Box Shape (rect, the same box as Blue Box)
+│     ├─ Blue Box (rect)          ← inside the mask, so the box is clipped by the mask
+│     ├─ Text - tagline
+│     └─ Phone 2 (group)
+├─ Blur effects (background ellipses, fade in for frames 3–4)
+Frame_03 (group: cards)   Frame_04 (group: card)
+```
+
+Timeline (3.87s, user-tuned):
+| Time (ms) | Beat | Operations |
+|---|---|---|
+| 0–700 | Phone 1 + title in | Phone `slideIn` up 1200 + Card Flip `rotationX` 25→0 (slowdown). Title `fadeIn` + `letterSpacing` +60→base |
+| 920–1220 | Phone 1 out | `slideOut` up 1400 (accelerate), title `fadeOut` |
+| 920 | Portal appears | `show` Box Portal. Box `resize` from small (300×170; mask from 0×0) to 750×250, smooth |
+| 1060–1510 | Phone 2 in | `slideIn` up 300 into the box (the user dropped the 3D turn) |
+| 1420–1820 | Box grows | Blue Box **and** mask `resize` to full box size together, smooth |
+| 1720–1960 | Phone breaks out | Mask `resize` anchor **s**, height +200 (custom easing). It starts just before the box finishes |
+| 1620–2020 | Tagline | `maskSlideIn` right |
+| 1980–2220 | Box to full screen | `scale` 1→1.55 on **both** Blue Box and the mask (smooth). Phone and tagline `slideOut` up (accelerate) |
+| 2180–2310 | Card background | Blur effects `fadeIn` |
+| 2260–2510 | Frame 03 in | `growIn` 0.7 (slowdown) |
+| 2310–2680 | Card details | Line chart `maskRevealIn` right, marker `growIn`, donut `spinIn` 90°, legends `slideIn` up staggered 30ms, bars `maskRevealIn` up staggered 20ms, value labels `fadeIn` after each bar |
+| 2790–2990 | Frame 03 out | `growOut` 1.3 (accelerate) |
+| 2990–3240 | Frame 04 in | `growIn` 0.7 (slowdown), **after** Frame 03 is gone (not overlapping) |
+| 3040–3350 | Frame 04 details | Dot-matrix columns `maskRevealIn` up, about 3.7ms stagger. Tooltip `growIn` 0.5. Title and button in |
+| 3470–3870 | Frame 04 out | `growOut` 0.85 (accelerate) |
+
+Lessons from the user's feedback:
+- **Mask and box must change together** (same size and timing). A phone poking out of a smaller box looks wrong.
+- The **breakout** (phone top above the box) happens **at the end** of the box growth, slightly overlapping it.
+- If the Blue Box sits inside the mask group, scale the **mask** too when the box goes full screen.
+- Grow-out and grow-in between card frames run **one after the other**, with the user's standard easing.
+- Card detail motion needs **editable** chart groups. The user replaced flat SVGs (the graph, the donut) with layers.
+- A resize on a rect after earlier resizes can behave oddly (it only stretched upward). Use `scale` for the final full-screen growth.
+
 ## 6. Multi-scene showreel recipe (SH05 - v2)
 
 This is the structure that worked for a 3-frame website showreel. For tool → tool → live stories, prefer section 5.
