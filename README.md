@@ -9,3 +9,5 @@ Rules, skills, workflow notes and helper tools for Jitter (jitter.video) animati
 - [skills/jitter-shared-element-showreel](skills/jitter-shared-element-showreel/SKILL.md): universal workflow for multi-frame stories where one element travels through every frame (e.g. Figma → Webflow → Live).
 - [skills/README.md](skills/README.md): index of all skills and how to add a new one.
 - [tools/](tools/): Swift scripts to read reference videos (info and contact sheets).
+- [SETUP.md](SETUP.md): set up a new Claude account or computer.
+- [HANDOFF.md](HANDOFF.md): current task and working preferences.

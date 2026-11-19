@@ -16,6 +16,10 @@ These are the user's rules for Jitter animation work in this folder. Read them b
 7. Keep replies short and honest. Report what was changed and what was not verified.
 8. **"Save this as workflow" means WORKFLOW.md first.** Add or update a section in WORKFLOW.md in the same style as the existing sections. Then, only if it is needed (the method is reusable on other projects, or it changes a recipe an existing skill holds), also add it to a skill: update the matching skill in `skills/`, or create a new one if none fits. Say which skill was changed and why.
 
+## New session or account
+
+Read [HANDOFF.md](HANDOFF.md) for the task in progress and the user's working preferences. Setup steps for a new Claude account are in [SETUP.md](SETUP.md).
+
 ## Detailed workflow
 
 See [WORKFLOW.md](WORKFLOW.md) for the full process, Jitter API notes, the Card Flip effect, recipes and the reference-video tools in `tools/`.
