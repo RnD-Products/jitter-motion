@@ -12,6 +12,11 @@ Each folder here is one skill: a reusable recipe any agent can follow. Claude Co
 | [jitter-gradient-reveal-dashboard](jitter-gradient-reveal-dashboard/SKILL.md) | A UI/dashboard product shot: UI rises in, vertical gradient mask sweep reveals a photo and a second UI copy together, then counters and graph motion (SH09, Scene-123 style) |
 | [jitter-screen-row-dive](jitter-screen-row-dive/SKILL.md) | A row of app screens: one starts alone, others pop in, each screen builds its UI, then the camera dives into the middle screen, which grows bigger (SH10, Scene-132 style) |
 | [jitter-box-portal-showreel](jitter-box-portal-showreel/SKILL.md) | Phone on title → small box portal → phone in box (breaks out) → box fills screen → dashboard card frames grow in/out with chart detail motion (SH11, Scene-152 style) |
+| [jitter-vertical-card-carousel](jitter-vertical-card-carousel/SKILL.md) | Dashboard scenes push and grow out into a vertical card column that scrolls one card per beat in fixed brackets, with a 3-line rolling headline (SH13) |
+| [jitter-deal-in-fan](jitter-deal-in-fan/SKILL.md) | A fanned deck of screens swings in from the bottom right with rotation, staggered 100ms, then a slow push and fan-open (SH14, Scene-112 style) |
+| [jitter-decode-unfold](jitter-decode-unfold/SKILL.md) | Scramble or decode text over a photo, grow-out, then a photo unfolds from a thin tilted strip with labels drifting out (SH15, Scene-141 style) |
+| [jitter-reel-assembly](jitter-reel-assembly/SKILL.md) | Combine finished frames (with their own motion and videos) into one reel, in sequence, ending with 0.5s rough cuts (SH16) |
+| [jitter-orbit-ring](jitter-orbit-ring/SKILL.md) | Logos or icons orbit continuously around a title on an ellipse, pop in as the ring unrolls, scale with depth, ring tightens at the end (SH17, Scene-153 style) |
 
 ## Adding a new skill
 

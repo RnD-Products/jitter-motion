@@ -117,6 +117,11 @@ This is the detailed working guide for Jitter (jitter.video) motion work in this
   - The new card goes from -90° to 0° (in easing), starting when the first ends.
   - `freeze: 'both'` keeps the new card edge-on, so invisible, until its flip starts.
 
+### Text scramble and copying old frames
+- `changeText` chains work as a text scramble or typewriter (see 5i). `textIn` with a large `offset` can show all the letters at once, so prefer the chain for exact control.
+- Instant ops (`hide`, `show`) still need `endTime`; set it equal to `startTime`.
+- Two sequential `scale` ops on one target: give only the first a `fromValue`, so the second continues from the current value.
+
 ### Rate limits and timeouts
 - "Rate-limiting" or "servers busy" means wait about 30 to 60 seconds, then retry once.
 - Use a background `sleep 30` and wait for its notification instead of polling.
@@ -344,6 +349,64 @@ Lessons from the user's edits:
 - They tightened everything (about 0.82× my timing) and shortened the artboard to 2.5s. These shots should feel quick.
 - The first card grows in **from big (1.5×)**, not from small.
 - The last frame needs an outro (`growOut` 0.85) at the end.
+
+## 5g. Push → grow-out → vertical card carousel with rolling text (SH13)
+
+**Skill:** [skills/jitter-vertical-card-carousel/SKILL.md](skills/jitter-vertical-card-carousel/SKILL.md).
+
+This is for two dashboard scenes followed by a column of cards that scrolls up one card per beat, while a 3-line headline rolls up in sync (6s).
+
+- **Scene 1 → 2:** a **push**. Scene 1 `slideOut` left while Scene 2 `slideIn` from the right (smooth, about 0.4s).
+- **Scene 2 details:** headlines rise by line, with the last word popping (`growIn` 0.6). KPI numbers use `counter`, and table rows `slideIn` up, staggered.
+- **Scene 2 → 3:** Scene 2 `growOut` 1.2. The card column rises in, and the **Focus Brackets** (separate from the cards, fixed in the centre) settle from 1.15.
+- **Carousel step:** column `move` up by (card height + gap); text group `move` up one line (139px); the out-of-focus line goes from orange to its faded gradient at 30% opacity; the next line goes from gradient to orange at 100% (`color` + `opacity`). The brackets pulse (scale 1 → 0.97 → 1).
+- **Per-card detail on arrival:** bars `maskRevealIn` up, the line `maskRevealIn` right, dots wave up, tooltip `growIn`. Start the detail **as the card moves in**, so it never looks empty.
+- **Build the column** so its order recreates each frame: duplicate cards are fine (Card 4 = Payroll again).
+
+## 5h. Fanned card deal-in (SH14, Scene-112 style)
+
+**Skill:** [skills/jitter-deal-in-fan/SKILL.md](skills/jitter-deal-in-fan/SKILL.md).
+
+This is for a stack of 2–4 screens fanned like a deck (front card top right, copies trailing down-left).
+
+- **0–0.15s:** empty background.
+- **Each card:** `move` from off-screen bottom right (about +1400, +1200) to 0, plus `rotate` −12 → 0, slowdown, 600ms. **Front card first**, the others 100ms apart.
+- **Settle (to the end):** `scale` 1 → 1.04 on Main; back cards drift further down-left (−30/+20, −60/+40), so the fan opens. Smooth.
+- Live counters only if the front screen is editable; image screens can't count.
+
+## 5i. Decode text → grow-out → photo unfold (SH15, Scene-141 style)
+
+**Skill:** [skills/jitter-decode-unfold/SKILL.md](skills/jitter-decode-unfold/SKILL.md).
+
+- **Decode text:** chain `changeText` ops every 45–52ms (empty → "C" → "Cs" → "CS" → "CSk" → … → "CSS Desigo" → "Desigx" → "CSS Design"). Each step adds the next correct letter plus a **random wrong trailing letter** that keeps changing until it locks. For a word that builds **from the right end**, set the text box `textAlign: right` and use suffix steps ("s", "ds", "rds", "brds", …). `effect` appear/disappear, nodeDuration 1.
+- **Camera push** during the decode: scene `scale` 1 → 1.1, photo drifts up.
+- **Scene 1 out:** `growOut` **1.3** (accelerate), about 250ms, ending at the cut (the user's choice).
+- **Photo unfold:** the photo sits in a `maskGrp`. Its mask rect `resize` from a thin strip (height 40) to full (anchor centre, slowdown, 400ms). The mask group `rotate` 15 → 3, then keeps turning to −3 (smooth). The group scales 0.9 → 1.05, and the photo zooms inside (1 → 1.15).
+- **Labels:** present at the cut, then **drift outward from the centre** (`move` from −8% to +8% of their distance from the centre) and grow 0.95 → 1.1, so the edges get cut, like the reference's "Build" words.
+
+## 5j. Assemble finished frames into a reel with rough cuts (SH16)
+
+**Skill:** [skills/jitter-reel-assembly/SKILL.md](skills/jitter-reel-assembly/SKILL.md).
+
+This is for when the frames already have their own motion and the reel should play them in sequence, ending with fast video cuts.
+
+- **One scene group per frame** (clipped). **Copy each frame's layers AND its ops**, shifting op times by the scene start. `playVideo` start/end = the scene window, `freeze: none`.
+- **Direct `actions.clone` can fail** on old frames (a `hide` op with no `endTime`, or leftover `duration`/`component` fields on groups and ops). Copy manually instead: rebuild the layer tree with new ids, strip `duration`, `component`, `componentStatus` and `csvImportInfo`, and set a missing `endTime` to `startTime`. Remap `targetId`.
+- **"Rough Cuts":** `hide` every later scene at 0, `show` it at its start, `hide` the previous scene at the same instant. Video shots are 0.5s each.
+- The user tunes the order and timing afterwards (Cards first, then the logo, a logo `growIn` on the first video cut, total 4.77s). Ask before changing the length.
+
+## 5k. Logo orbit ring (SH17, Scene-153 style)
+
+**Skill:** [skills/jitter-orbit-ring/SKILL.md](skills/jitter-orbit-ring/SKILL.md).
+
+This is for logos or icons on an elliptical ring around a title that **orbit continuously** (a real loop, not a small drift).
+
+- **Wrap each logo** in an "Orbit - Logo NN" group sized to the logo (the travel and size go on the wrapper; the pop-in goes on the logo inside).
+- **Number the slots clockwise.** Each logo moves slot → slot along the ring with chained `move` deltas (linear). A shared phase curve p(t) gives the crossing times: fast for 0–0.5s (about 4 slots), slow but never stopping to about 1.65s (+1.5), then faster to the end (+2.5).
+- **Depth:** a `scale` chain per segment toward (next slot size ÷ own size)^1.15. Only the first op has a `fromValue`; the rest use `toValue` only.
+- **Reveal sweep:** the first 3 logos sit at the spawn point (the right end of the title). The rest `growIn` 0.2, 45ms apart, each appearing where it currently is on the ring.
+- **Exit:** the Logo Ring group scales to about 0.35 (accelerate) while the logos keep orbiting faster. **Never rotate the ring group**, because that tilts the ellipse itself.
+- **Limit:** z-order can't change during the animation.
 
 ## 6. Multi-scene showreel recipe (SH05 - v2)
 

@@ -34,6 +34,16 @@ See [WORKFLOW.md](WORKFLOW.md) for the full process, Jitter API notes, the Card 
 
 - `skills/jitter-box-portal-showreel/SKILL.md`: phone on title → small coloured box portal → second phone in the box (breaks out of its top) → box fills the screen → card frames grow in and out with chart detail motion. The mask and box always move together.
 
+- `skills/jitter-vertical-card-carousel/SKILL.md`: dashboard scenes → push → grow-out → vertical card column scrolling one card per beat inside fixed focus brackets, with a rolling 3-line headline (orange focus line).
+
+- `skills/jitter-deal-in-fan/SKILL.md`: fanned stack of screens deals in from the bottom-right corner (rotate −12 → 0, front first, 100ms stagger), then a slow push-in while the fan opens.
+
+- `skills/jitter-decode-unfold/SKILL.md`: scramble/decode headline text (changeText chains, one word from the right), scene grows out to 130%, photo unfolds from a thin tilted strip, labels drift outward.
+
+- `skills/jitter-reel-assembly/SKILL.md`: assemble finished frames with their own motion into one reel in sequence; manual copy when clone fails; rough cuts (hide/show) between 0.5s video shots.
+
+- `skills/jitter-orbit-ring/SKILL.md`: logos or icons orbit continuously around a title on an elliptical ring (a real loop through the slots), pop in from a spawn point, depth scaling, ring tightens at the end; never rotate the ring group.
+
 ### Using the skills from any agent
 
 **Claude Code is the primary agent for this folder.** It does the main Jitter work and keeps the rules, workflow and skills up to date. Other agents are supported as secondary agents and follow the same files.
