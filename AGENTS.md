@@ -48,6 +48,8 @@ See [WORKFLOW.md](WORKFLOW.md) for the full process, Jitter API notes, the Card 
 
 - `skills/jitter-orbit-ring/SKILL.md`: logos or icons orbit continuously around a title on an elliptical ring (a real loop through the slots), pop in from a spawn point, depth scaling, ring tightens at the end; never rotate the ring group.
 
+- `skills/jitter-scroll-landing-page/SKILL.md`: a long landing page scrolls inside a fixed screen (the "Sereen" component), one section per beat as two overlapping moves, then section reveals, a hiding navbar, a cursor and a loop back to the hero. Its scroll easing is custom, so ask before using it.
+
 ### Using the skills from any agent
 
 **Claude Code is the primary agent for this folder.** It does the main Jitter work and keeps the rules, workflow and skills up to date. Other agents are supported as secondary agents and follow the same files.
