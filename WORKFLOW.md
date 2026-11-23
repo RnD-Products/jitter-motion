@@ -427,13 +427,13 @@ This is for a full landing page that scrolls inside a fixed screen, section by s
   - scroll settle: start `upper: 0`, end `lower: {x: 0.58, y: 0.18}`;
   - cursor: `upper: 0.57`, `lower: 0.57`;
   - navbar hide: `upper: 0.7`, `lower: 0.5`.
-- **Two ways to build the page:**
-  - Simple: move the single `Scroll` group every beat.
-  - Pinned sections: split the page into nested groups (`Scroll_P.01` → `hero` + `Scroll_P01_1`, `Scroll_ P02` → …). Put the same pair of moves on every group that should travel in that beat. Lower groups move first while the upper one stays, so the hero looks pinned and the next section slides over it; later beats move the upper group too.
+- **Two scroll types (the user's names):**
+  - **Standard:** move the single `Scroll` group every beat.
+  - **Sticky:** split the page into nested groups (`Scroll_P.01` → `hero` + `Scroll_P01_1`, `Scroll_ P02` → …). Put the same pair of moves on every group that should travel in that beat. Lower groups move first while the upper one stays, so the hero looks pinned and the next section slides over it; later beats move the upper group too.
 - **Reveals:** after each beat, the content now in view comes in with native presets (`slideIn`, `growIn` with `noFade`, `maskSlideIn`, `maskRevealIn`, `maskResizeIn` with `zoomContent`, `textIn` by lines, `blurSlideIn`), slowdown 50 or smooth 50, starting while the settle move is still finishing.
 - **Navbar:** `move` y −115 with the first scroll, +115 (slowdown 50) at the end.
 - **Cursor:** the `Mouse` SVG moves between beats (0.8–1.6s each) to the thing that reacts next (gallery slide, image swap, button). A second cursor for the hero intro is swapped with `hide`/`show` at the same instant.
-- **Loop ending:** `Hero_End` is a copy of the hero under the page. In the last 2–5s the hero video plays again and its text re-enters, so the last frame matches the first. The simple build also moves `Scroll` back down (+5787 in 1.2s).
+- **Loop ending:** `Hero_End` is a copy of the hero under the page. In the last 2–5s the hero video plays again and its text re-enters, so the last frame matches the first. The Standard type also moves `Scroll` back down (+5787 in 1.2s).
 
 ## 6. Multi-scene showreel recipe (SH05 - v2)
 
