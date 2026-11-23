@@ -17,6 +17,7 @@ Each folder here is one skill: a reusable recipe any agent can follow. Claude Co
 | [jitter-decode-unfold](jitter-decode-unfold/SKILL.md) | Scramble or decode text over a photo, grow-out, then a photo unfolds from a thin tilted strip with labels drifting out (SH15, Scene-141 style) |
 | [jitter-reel-assembly](jitter-reel-assembly/SKILL.md) | Combine finished frames (with their own motion and videos) into one reel, in sequence, ending with 0.5s rough cuts (SH16) |
 | [jitter-orbit-ring](jitter-orbit-ring/SKILL.md) | Logos or icons orbit continuously around a title on an ellipse, pop in as the ring unrolls, scale with depth, ring tightens at the end (SH17, Scene-153 style) |
+| [jitter-scroll-landing-page](jitter-scroll-landing-page/SKILL.md) | A long landing page or website scrolls inside a fixed screen, one section per beat, with section reveals, a hiding navbar, a cursor and a loop back to the hero (the "Sereen" files) |
 
 ## Adding a new skill
 

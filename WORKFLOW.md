@@ -408,6 +408,33 @@ This is for logos or icons on an elliptical ring around a title that **orbit con
 - **Exit:** the Logo Ring group scales to about 0.35 (accelerate) while the logos keep orbiting faster. **Never rotate the ring group**, because that tilts the ellipse itself.
 - **Limit:** z-order can't change during the animation.
 
+## 5l. Scrollable landing page (the user's "Sereen" files)
+
+**Skill:** [skills/jitter-scroll-landing-page/SKILL.md](skills/jitter-scroll-landing-page/SKILL.md).
+
+This is for a full landing page that scrolls inside a fixed screen, section by section, with a cursor, for 30–40s. Learned by reading three of the user's own files (1170×823 at 36s, 1170×833 at 34.5s, 1600×980 at 41s). Playback was not watched; values come from the file data.
+
+- **One master artboard named "Sereen"** holds all the motion and is a **component**. The export artboards (Dribbble 1600×1200, Reels 1080×1920, Pinterest 1080×1500) only hold an instance of it on a coloured background, so one edit updates every format.
+- **Layers, back to front:** `Main` (clipped) → `Screen` mask group (`Screen Mask` + `Screen`) → `Hero_End`, `Scroll`, `Navber`, `Mouse`.
+- **`Scroll` holds the whole page as one tall group** (8692px and 10595px in the references).
+- **A scroll beat is two overlapping `move`s on the same target** (deltas add up):
+  - main: about 1300ms, most of the distance (for example −641);
+  - settle: starts about 410ms later, lasts about 1240ms, the rest (for example −182).
+  - Together about one screen height (641+182 = 823). Vary per section so each one lands framed.
+- **Rhythm:** a beat takes about 1.65s, then a 2–4s hold while the section animates. 6–10 beats per video. The first scroll starts at 0.6–0.8s, or about 5s when the hero has its own intro.
+- **Easing in these files is custom, not native presets** (rule 1: ask the user before using them):
+  - scroll main: `custom:path:v1`, start `upper: 0.68`, end `lower: 0.8`;
+  - scroll settle: start `upper: 0`, end `lower: {x: 0.58, y: 0.18}`;
+  - cursor: `upper: 0.57`, `lower: 0.57`;
+  - navbar hide: `upper: 0.7`, `lower: 0.5`.
+- **Two ways to build the page:**
+  - Simple: move the single `Scroll` group every beat.
+  - Pinned sections: split the page into nested groups (`Scroll_P.01` → `hero` + `Scroll_P01_1`, `Scroll_ P02` → …). Put the same pair of moves on every group that should travel in that beat. Lower groups move first while the upper one stays, so the hero looks pinned and the next section slides over it; later beats move the upper group too.
+- **Reveals:** after each beat, the content now in view comes in with native presets (`slideIn`, `growIn` with `noFade`, `maskSlideIn`, `maskRevealIn`, `maskResizeIn` with `zoomContent`, `textIn` by lines, `blurSlideIn`), slowdown 50 or smooth 50, starting while the settle move is still finishing.
+- **Navbar:** `move` y −115 with the first scroll, +115 (slowdown 50) at the end.
+- **Cursor:** the `Mouse` SVG moves between beats (0.8–1.6s each) to the thing that reacts next (gallery slide, image swap, button). A second cursor for the hero intro is swapped with `hide`/`show` at the same instant.
+- **Loop ending:** `Hero_End` is a copy of the hero under the page. In the last 2–5s the hero video plays again and its text re-enters, so the last frame matches the first. The simple build also moves `Scroll` back down (+5787 in 1.2s).
+
 ## 6. Multi-scene showreel recipe (SH05 - v2)
 
 This is the structure that worked for a 3-frame website showreel. For tool → tool → live stories, prefer section 5.
